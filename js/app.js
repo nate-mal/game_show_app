@@ -42,8 +42,10 @@ function addPhraseToDisplay(arrayPhrase) {
 function checkLetter(button) {
   const phraseList = ulPhrase.children;
   for (eachLi of phraseList) {
-    if (button.textContent.toLowerCase() === eachLi.textContent.toLowerCase())
+    if (button.textContent.toLowerCase() === eachLi.textContent.toLowerCase()) {
       eachLi.className += " show";
+      return eachLi;
+    }
   }
 }
 
