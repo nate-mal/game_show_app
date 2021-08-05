@@ -19,8 +19,7 @@ const phrases = [
 
 const overlay = document.querySelector("#overlay");
 overlay.addEventListener("click", (e) => {
-  //   const overlay = startGame.parentNode;
-  if ((e.target.className = "btn__reset")) {
+  if (e.target.className === "btn__reset") {
     const resetButton = e.target;
     if (resetButton.className === "btn__reset") overlay.style.display = "none";
     if (resetButton.textContent.includes("again")) {
@@ -33,6 +32,7 @@ overlay.addEventListener("click", (e) => {
 
 function resetGame() {
   overlay.style.display = "none";
+  ulPhrase.style.display = "";
   missed = 0;
   const phraseArray = getRandomPhraseAsArray(phrases);
   const ul = phrase.firstElementChild;
@@ -98,29 +98,34 @@ function checkWin() {
 // this event listener watches for letter buttons that are selected from the qwerty keyboard displayed on the page and run the checkletter(button) function on each selected button
 qwerty.addEventListener("click", (e) => {
   if (e.target.tagName === "BUTTON") {
-    function userMessage(message) {
-      const userMes = document.createElement("h3");
-      userMes.textContent = message;
-      overlay.insertBefore(userMes, overlay.lastElementChild);
+    function overlayMessage(state) {
+      function userMessage(message) {
+        const userMes = document.createElement("h3");
+        userMes.textContent = message;
+        overlay.insertBefore(userMes, overlay.lastElementChild);
+      }
+      overlay.className = state;
+      ulPhrase.style.display = "none";
+      if (state === "win")
+        overlay.querySelector(".btn__reset").textContent = "Play again";
+      else if (state === "lose")
+        overlay.querySelector(".btn__reset").textContent = "Try again";
+      overlay.style.display = "";
+      userMessage(`You ${state}!`);
     }
     button = e.target;
     const letterFound = checkLetter(button);
     if (!letterFound) {
       missed++;
       lostOneHeart();
+      button.className += " wrong";
     }
     button.className += " chosen";
     button.disabled = "true";
     if (checkWin()) {
-      overlay.className = "win";
-      overlay.querySelector(".btn__reset").textContent = "Play again";
-      overlay.style.display = "";
-      userMessage("You win!");
+      overlayMessage("win");
     } else if (missed === 5) {
-      overlay.className = "lose";
-      overlay.querySelector(".btn__reset").textContent = "Try again";
-      overlay.style.display = "";
-      userMessage("You lost!");
+      overlayMessage("lose");
     }
   }
 });

@@ -1,3 +1,26 @@
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
 /* Main styles */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&Roboto:300");
 
@@ -8,6 +31,7 @@
   --color-lose: #d94545;
   --color-start: #5b85b7;
   --color-neutral: #445069;
+  --color-wrong: rgb(255, 166, 0);
   --color-neutral-light: #d2d2d2;
   --color-keys: #37474f;
   --color-keys-light: #e5e5e5;
@@ -98,6 +122,12 @@ button {
 .show {
   color: #000;
   background-color: #76ce82;
+  transition: transform 0.5s cubic-bezier(0, -31, 0, 51);
+  transform: scale(1.01);
+  /* animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;  */
 }
 
 /* Keyboard */
@@ -112,6 +142,9 @@ button {
   border-radius: 5px;
   font-size: var(--font-size-medium);
   color: #ffffff;
+}
+.wrong {
+  background-color: var(--color-wrong);
 }
 
 .btn__reset {
@@ -165,3 +198,5 @@ button {
 .lose a {
   color: var(--color-lose);
 }
+
+/* css transition effects for list item in phrase section */
