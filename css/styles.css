@@ -113,6 +113,7 @@ button {
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
+  user-select: none;
 }
 
 .space {
