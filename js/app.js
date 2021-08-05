@@ -38,7 +38,7 @@ function resetGame() {
   const ul = phrase.firstElementChild;
   ul.innerHTML = "";
   addPhraseToDisplay(phraseArray);
-  overlay.removeChild(document.querySelector("h3"));
+  overlay.removeChild(document.querySelector("h2:last-of-type"));
   const resetHearts = () => {
     const Hearts = scoreboard.querySelectorAll('img[src *= "lostHeart"]');
     for (eachHeart of Hearts) {
@@ -100,9 +100,9 @@ qwerty.addEventListener("click", (e) => {
   if (e.target.tagName === "BUTTON") {
     function overlayMessage(state) {
       function userMessage(message) {
-        const userMes = document.createElement("h3");
+        const userMes = document.createElement("h2");
         userMes.textContent = message;
-        overlay.insertBefore(userMes, overlay.lastElementChild);
+        overlay.insertBefore(userMes, overlay.lastElementChild.nextSibling);
       }
       overlay.className = state;
       ulPhrase.style.display = "none";
